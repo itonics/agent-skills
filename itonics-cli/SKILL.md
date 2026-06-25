@@ -13,6 +13,10 @@ metadata:
 
 Thin wrapper around the ITONICS Innovation OData v2 API. Use for any task that lists, creates, updates, or deletes elements / element types / files / attachments / watches / likes in an ITONICS tenant.
 
+## No terminal? Use the MCP connector
+
+Prefer not to install the CLI? On **Claude.ai, Claude Desktop, Cursor, or ChatGPT**, the hosted [itonics-mcp](https://github.com/itonics/itonics-mcp) connector exposes the same surface as self-describing MCP tools — no local config needed. Add a custom connector / remote MCP server and paste the Streamable HTTP endpoint `https://itonics-mcp.com/mcp` (include the `/mcp` path), or for Claude Code run `claude mcp add --transport http itonics https://itonics-mcp.com/mcp`. Auth runs through a browser OAuth flow. The [property-write encoding](#property-writes) below applies the same way.
+
 ## Prerequisites
 
 Install the CLI using the [setup instructions](https://github.com/itonics/itonics-cli#install), then log in once:
