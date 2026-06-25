@@ -12,10 +12,10 @@ Skills for Claude Code, Codex CLI, Gemini CLI, Cursor, Windsurf, OpenCode and ot
 
 If you're on **Claude.ai, Claude Desktop, Cursor, or ChatGPT** and don't want to install a CLI, use the hosted [itonics-mcp](https://github.com/itonics/itonics-mcp) connector instead. It exposes the same surface (elements, types, files, attachments, watches, likes) as self-describing MCP tools — no skill file or local config needed.
 
-- **Claude.ai / Desktop / Cursor / ChatGPT** — add a custom connector / remote MCP server and paste the base URL (no path suffix):
+- **Claude.ai / Desktop / Cursor / ChatGPT** — add a custom connector / remote MCP server and paste the Streamable HTTP endpoint (include the `/mcp` path):
 
   ```
-  https://itonics-mcp.com
+  https://itonics-mcp.com/mcp
   ```
 
 - **Claude Code (CLI)** — use the Streamable HTTP endpoint:
