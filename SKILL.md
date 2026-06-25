@@ -20,7 +20,7 @@ Skills for Claude Code, Codex CLI, Gemini CLI, Cursor, Windsurf, OpenCode and ot
 
 ## No terminal? Use the MCP connector
 
-For clients without a CLI (**Claude.ai, Claude Desktop, Cursor, ChatGPT**), the hosted [itonics-mcp](https://github.com/itonics/itonics-mcp) connector exposes the same surface as self-describing MCP tools — no skill file or local config needed. Add a custom connector / remote MCP server and paste the Streamable HTTP endpoint `https://itonics-mcp.com/mcp` (include the `/mcp` path), or for Claude Code run `claude mcp add --transport http itonics https://itonics-mcp.com/mcp`. Auth runs through a browser OAuth flow. For per-type **property-write encoding**, the connector reuses [itonics-cli/SKILL.md → Property writes](itonics-cli/SKILL.md#property-writes).
+For clients without a CLI (**Claude.ai, Claude Desktop, Cursor, ChatGPT**), the hosted itonics-mcp connector exposes the same surface as self-describing MCP tools — no skill file or local config needed. Add a custom connector / remote MCP server and paste the Streamable HTTP endpoint `https://itonics-mcp.com/mcp` (include the `/mcp` path), or for Claude Code run `claude mcp add --transport http itonics https://itonics-mcp.com/mcp`. Auth runs through a browser OAuth flow. For per-type **property-write encoding**, the connector reuses [itonics-cli/SKILL.md → Property writes](itonics-cli/SKILL.md#property-writes).
 
 ## Install
 
