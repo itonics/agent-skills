@@ -15,7 +15,7 @@ Thin wrapper around the ITONICS Innovation OData v2 API. Use for any task that l
 
 ## No terminal? Use the MCP connector
 
-Prefer not to install the CLI? On **Claude.ai, Claude Desktop, Cursor, or ChatGPT**, the hosted itonics-mcp connector exposes the same surface as self-describing MCP tools — no local config needed. Add a custom connector / remote MCP server and paste the Streamable HTTP endpoint `https://itonics-mcp.com/mcp` (include the `/mcp` path), or for Claude Code run `claude mcp add --transport http itonics https://itonics-mcp.com/mcp`. Auth runs through a browser OAuth flow. The [property-write encoding](#property-writes) below applies the same way.
+Prefer not to install the CLI? On **Claude.ai, Claude Desktop, Cursor, or ChatGPT**, the hosted itonics-mcp connector exposes the same surface as self-describing MCP tools — no local config needed. Add a custom connector / remote MCP server and paste the Streamable HTTP endpoint `https://itonics-mcp.com/mcp` (include the `/mcp` path), or for Claude Code run `claude mcp add --scope user --transport http itonics https://itonics-mcp.com/mcp`. Auth runs through a browser OAuth flow. The [property-write encoding](#property-writes) below applies the same way.
 
 ## Prerequisites
 

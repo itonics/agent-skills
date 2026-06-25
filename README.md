@@ -8,20 +8,20 @@ Skills for Claude Code, Codex CLI, Gemini CLI, Cursor, Windsurf, OpenCode and ot
 |-------|-------------|
 | **[itonics-cli](itonics-cli/SKILL.md)** | Primary CLI — elements, types, files, attachments, watches, likes |
 
-## No terminal? Use the MCP connector
+## MCP connector
 
-If you're on **Claude.ai, Claude Desktop, Cursor, or ChatGPT** and don't want to install a CLI, use the hosted itonics-mcp connector instead. It exposes the same surface (elements, types, files, attachments, watches, likes) as self-describing MCP tools — no skill file or local config needed.
+Prefer not to install the CLI? The hosted itonics-mcp connector exposes the same surface (elements, types, files, attachments, watches, likes) as self-describing MCP tools — no skill file or local config needed. It works with any MCP client (Claude.ai, Claude Desktop, Cursor, ChatGPT, Claude Code).
 
-- **Claude.ai / Desktop / Cursor / ChatGPT** — add a custom connector / remote MCP server and paste the Streamable HTTP endpoint (include the `/mcp` path):
+- **Claude Code** — add it at user scope so it's available across all your projects:
+
+  ```bash
+  claude mcp add --scope user --transport http itonics https://itonics-mcp.com/mcp
+  ```
+
+- **Claude.ai / Desktop / Cursor / ChatGPT** — add a custom connector / remote MCP server and paste the Streamable HTTP endpoint (keep the `/mcp` path):
 
   ```
   https://itonics-mcp.com/mcp
-  ```
-
-- **Claude Code (CLI)** — use the Streamable HTTP endpoint:
-
-  ```bash
-  claude mcp add --transport http itonics https://itonics-mcp.com/mcp
   ```
 
 Auth runs through an OAuth flow in the browser; the first authorizing user in a workspace supplies the ITONICS domain, space, and API key, and later members just confirm and provide their email. For the per-type **property-write encoding** (select option URIs, `rich_text` HTML/base64, file/relation values), the connector points back to [itonics-cli/SKILL.md → Property writes](itonics-cli/SKILL.md#property-writes).
