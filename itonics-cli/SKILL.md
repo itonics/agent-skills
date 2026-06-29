@@ -45,7 +45,7 @@ If any command fails with `missing credentials: …`, prompt the user to run `it
 | Log out | `itonics logout` |
 | List elements | `itonics elements list -n 20 --format table` |
 | Filter by type | `itonics elements list -f "elementTypeUri eq 'XXX'"` |
-| Full-text search | `itonics elements list -s "keyword"` |
+| Filter by text | `itonics elements list -f "contains(label,'budget')"` (no full-text `$search`) |
 | Get one element | `itonics elements get URI --raw` |
 | Create element | `itonics elements create --type URI --label LBL --created-by EMAIL` |
 | Update element | `itonics elements update URI --updated-by EMAIL --label "New"` |
@@ -62,6 +62,10 @@ If any command fails with `missing credentials: …`, prompt the user to run `it
 | Remove watch | `itonics watches remove ELEMENT_URI USER_URI` |
 | List likes | `itonics likes list ELEMENT_URI --orderby "likedOn desc"` |
 | Add like | `itonics likes add ELEMENT_URI USER_URI` |
+| List comments | `itonics comments list ELEMENT_URI` |
+| Add comment | `itonics comments create ELEMENT_URI --commented-by EMAIL --text "..."` |
+| List views | `itonics views list --format table` |
+| Create page view | `itonics views create --label LBL --created-by EMAIL --html "<div>...</div>"` |
 
 ## Required Input Resolution
 
@@ -78,8 +82,8 @@ For commands that need specific values (`URI`, `EMAIL`, `USER_URI`, etc.), resol
 ### Elements
 
 ```bash
-# List
-itonics elements list [-f ODATA_FILTER] [-s SEARCH] [-n LIMIT] [--orderby FIELD] [--select FIELDS] [--raw] [--format json|table]
+# List (no full-text $search — use contains() in -f, e.g. -f "contains(label,'budget')")
+itonics elements list [-f ODATA_FILTER] [-n LIMIT] [--orderby FIELD] [--select FIELDS] [--raw] [--format json|table]
 
 # Get one
 itonics elements get URI [--expand NAV] [--raw] [--format json|table]
@@ -144,6 +148,33 @@ itonics watches remove ELEMENT_URI [USER_URI...]   # empty list = no-op
 itonics likes list ELEMENT_URI [--filter ODATA] [--orderby "likedOn desc"] [--top N] [--skip N]
 itonics likes add ELEMENT_URI USER_URI [USER_URI...]
 itonics likes remove ELEMENT_URI [USER_URI...]     # empty list = no-op
+```
+
+### Comments
+
+Comment text is plain text or HTML (stored as TipTap). Mention a user inline with `@email@domain.com` and reference an element with `#{Element label}` or `#{elementUri}` — both are parsed from the text automatically.
+
+```bash
+# $filter supports commentedBy/updatedBy (emails) and createdOn/updatedOn comparisons
+itonics comments list ELEMENT_URI [--filter ODATA] [--orderby "createdOn desc"] [--select FIELDS] [--top N]
+itonics comments create ELEMENT_URI --commented-by EMAIL --text "Hi @bob@acme.com, see #{My Idea}"
+itonics comments update ELEMENT_URI COMMENT_URI --updated-by EMAIL [--text TEXT]
+itonics comments delete ELEMENT_URI COMMENT_URI [COMMENT_URI...] [--yes]
+```
+
+### Views
+
+Saved views (presets). Creation supports the `page_view` preset only — a custom page built from plain HTML + stock Tailwind utilities (no JavaScript, no custom CSS, no theme customization). `--html` accepts plain markup or a `base64:<...>` string. Embed an uploaded file by its download path and link to other views by full URL.
+
+```bash
+itonics views list [-f ODATA_FILTER] [--orderby FIELD] [--top N] [--raw] [--format json|table]
+itonics views get URI [--raw]
+itonics views create --label LABEL --created-by EMAIL \
+  [--preset page_view] [--visibility workspace|private] [--folder URI] \
+  [--html "<div class='p-4'>...</div>"] [--favorite] [--raw]
+itonics views update URI --updated-by EMAIL \
+  [--label TEXT] [--visibility V] [--folder URI] [--html HTML] [--favorite] [--raw]
+itonics views delete URI [URI...] [--yes]
 ```
 
 ## Property writes
